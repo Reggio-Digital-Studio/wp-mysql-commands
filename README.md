@@ -16,6 +16,21 @@ WHERE
 
 ### Delete Post Revisions
 
+```
+DELETE a , b , c FROM wp_posts a
+        LEFT JOIN
+    wp_term_relationships b ON (a.ID = b.object_id)
+        LEFT JOIN
+    wp_postmeta c ON (a.ID = c.post_id)
+        LEFT JOIN
+    wp_term_taxonomy d ON (b.term_taxonomy_id = d.term_taxonomy_id) 
+WHERE
+    a.post_type = 'revision'
+    AND d.taxonomy != 'link_category';
+```
+
+[Credit](http://www.ambrosite.com/blog/clean-up-wordpress-revisions-using-a-mysql-multi-table-delete)
+
 ### Delete Spam Comments
 
 ```
