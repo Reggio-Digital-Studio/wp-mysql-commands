@@ -83,6 +83,17 @@ WHERE
     ID > '1';
 ```
 
+### Delete All Users Except Admins
+
+```
+DELETE wu FROM `wp_users` wu
+        INNER JOIN
+    wp_usermeta ON wu.ID = wp_usermeta.user_id 
+WHERE
+    meta_key = 'wp_capabilities'
+    AND meta_value NOT LIKE '%administrator%'
+````
+
 ## WooCommerce Core
 
 https://woocommerce.com
