@@ -19,16 +19,42 @@ WHERE
 ### Delete Spam Comments
 
 ```
-DELETE FROM wp_comments WHERE comment_approved = 'spam';
+DELETE FROM wp_comments
+	WHERE comment_approved = 'spam';
 ```
 
 ### Delete Transients
 
+```
+DELETE FROM wp_options 
+WHERE
+    option_name LIKE ('%\_transient\_%')
+```
+
 ### Delete Pingbacks and Trackbacks
+
+```
+DELETE FROM wp_comments
+WHERE
+	comment_type = 'pingback';
+DELETE FROM wp_comments 
+WHERE
+    comment_type = 'trackback';
+```
 
 ### Delete Transients
 
 ### Delete WordPress Sessions
+
+### Delete Orphaned Post Meta
+
+```
+DELETE pm FROM wp_postmeta pm
+        LEFT JOIN
+    wp_posts wp ON wp.ID = pm.post_id 
+WHERE
+    wp.ID IS NULL
+```
 
 ### Change The Email Address of All Users
 
@@ -66,7 +92,7 @@ WHERE
 
 ## WooCommerce Plugins
 
-### Delete Stripe Live Key
+### Delete Stripe Payment ID's
 
 https://woocommerce.com/products/stripe/
 
