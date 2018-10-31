@@ -22,6 +22,10 @@ WHERE
 
 ### Delete Pingbacks and Trackbacks
 
+### Delete Transients
+
+### Delete WordPress Sessions
+
 ## WooCommerce Core
 
 ### Delete webhooks & REST API keys
