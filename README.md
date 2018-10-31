@@ -4,7 +4,7 @@ The following guide is meant to help you slim down your WordPress MySQL database
 
 ## WordPress Core
 
-### Deactive all plugins
+### Deactivate All Plugins
 
 ```
 UPDATE wp_options 
@@ -18,6 +18,10 @@ WHERE
 
 ### Delete Spam Comments
 
+```
+DELETE FROM wp_comments WHERE comment_approved = 'spam';
+```
+
 ### Delete Transients
 
 ### Delete Pingbacks and Trackbacks
@@ -26,12 +30,69 @@ WHERE
 
 ### Delete WordPress Sessions
 
+### Change The Email Address of All Users
+
+This is especially helpful to avoid accidental email sending from the staging site.
+
+```
+UPDATE wp_users 
+SET 
+    user_email = 'test@test.test'
+WHERE
+    ID > '1';
+```
+
 ## WooCommerce Core
 
+https://woocommerce.com
+
 ### Delete webhooks & REST API keys
+
+### Delete Customer User Profile Information
+
+```
+UPDATE wp_usermeta 
+SET 
+    meta_value = NULL
+WHERE
+    meta_key = 'first_name'
+    OR meta_key = 'last_name'
+    OR meta_key = 'billing_country'
+    OR meta_key = 'billing_first_name'
+    OR meta_key = 'billing_email'
+    OR meta_key = 'billing_phone'
+    OR meta_key = '_stripe_customer_id';
+```
 
 ## WooCommerce Plugins
 
 ### Delete Stripe Live Key
 
+https://woocommerce.com/products/stripe/
+
+```
+UPDATE wp_postmeta 
+SET 
+    meta_value = NULL
+WHERE
+    meta_key = '_stripe_charge_id'
+    OR meta_key = 'Stripe Payment ID';
+```
+
 ### Delete Braintree Live Key
+
+https://woocommerce.com/products/woocommerce-gateway-paypal-powered-by-braintree/
+
+## Misc Plugins
+
+### Delete SendGrid Key
+
+https://wordpress.org/plugins/sendgrid-email-delivery-simplified/
+
+```
+UPDATE wp_options 
+SET 
+    option_value = ''
+WHERE
+    option_name = 'sendgrid_api_key';
+```
