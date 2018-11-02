@@ -57,9 +57,9 @@ WHERE
     comment_type = 'trackback';
 ```
 
-### Delete Transients
-
 ### Delete WordPress Sessions
+
+TODO
 
 ### Delete Orphaned Post Meta
 
@@ -98,7 +98,9 @@ WHERE
 
 https://woocommerce.com
 
-### Delete webhooks & REST API keys
+### Delete Webhooks & REST API Keys
+
+TODO
 
 ### Delete Customer User Profile Information
 
